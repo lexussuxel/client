@@ -6,7 +6,8 @@ export const getItemInCollection = async (id) => {
     return data;
 }
 
-export const CreateItem = async (collectionId) => {
-    const {data} = await $authHost.post(`api/item/${collectionId}/create`);
+export const CreateItem = async (item, id) => {
+
+    const {data} = await $authHost.post(`api/item/${id}/create`, item);
     return data;
 }

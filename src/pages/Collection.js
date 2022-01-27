@@ -1,21 +1,48 @@
-import React, {useContext, useMemo, useState} from 'react';
+import React, {useContext, useEffect, useMemo, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import {findCollectionById} from "../http/collectionApi";
 import {Context} from "../index";
 import {Button, Col, Container, Row} from "react-bootstrap";
-import {CREATE_ITEM_ROUTE} from "../util/constants";
 import NavigateItems from "../components/NavigateItems";
 import ItemList from "../components/ItemList";
+import ItemInputModal from "../components/ItemInputModal";
+import {CreateItem, getItemInCollection} from "../http/itemAPI";
+import defImage from "./image.png"
 
 
 const Collection = () => {
 
     const {user} = useContext(Context)
     const navigate  = useNavigate();
+    const [itemVisible, setItemVisible] = useState(false)
+    const Hide = () => {
+        setItemVisible(false)
+    }
     const {id} = useParams();
-    const [collection, setCollection] = useState({email:"lala"}) ;
+    const [collection, setCollection] = useState({}) ;
     const getCollection = async() => {
         setCollection(await findCollectionById(id));
+    }
+    const [items, setItems] = useState([]);
+
+    useEffect(
+        async() =>
+            setItems(await getItemInCollection(id)),
+        [])
+
+    const CreateItem1 = async (name, description, image) => {
+        if (!image){
+            image = new File([""], "image.png", {
+                type: "image/jpeg"
+            })}
+        console.log(image)
+        const formData = new FormData()
+        formData.append('name', name)
+        formData.append('description', description)
+        formData.append('img', image)
+        formData.append('collectionId', id)
+        await CreateItem(formData, id).then(data => setItemVisible(false))
+
     }
 
     useMemo(getCollection, [id]);
@@ -27,7 +54,7 @@ const Collection = () => {
 
                     <h1 style={{display:"inline"}}>{collection.name}</h1>
                     {(collection.userId === user.user.id)?
-                        <Button variant={'outline-dark'} style={{width: 200, position:"absolute", right: 110}} onClick={()=>navigate(CREATE_ITEM_ROUTE)}>Create Item</Button>
+                        <Button variant={'outline-dark'} style={{width: 200, position:"absolute", right: 110}} onClick={()=>setItemVisible(true)}>Create Item</Button>
                         : null
                     }
                 </div>
@@ -40,12 +67,13 @@ const Collection = () => {
 
                     </Col>
                     <Col md={9}>
-                        <ItemList />
+                        <ItemList items={items}/>
                     </Col>
 
                 </Row>
 
             </Row>
+            <ItemInputModal show={itemVisible} onHide={Hide} create={CreateItem1}/>
         </Container>
     );
 };

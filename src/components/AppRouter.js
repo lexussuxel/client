@@ -11,17 +11,17 @@ const AppRouter = () => {
             <Routes>
                 {user.user.role === "ADMIN" &&
                     adminRoutes.map(({path, Component}) =>
-                        <Route path={path} element={<Component />} />
+                        <Route path={path} key={path} element={<Component />} />
                     )
                 }
                 {user.isAuth && authRoutes.map(({path, Component}) =>
-                    <Route path={path} element={<Component />} />
+                    <Route key={path} path={path} element={<Component />} />
                 )}
 
                 {publicRoutes.map(({path, Component}) =>
-                    <Route path={path} element={<Component />} />
+                    <Route path={path} key={path} element={<Component />} />
                 )}
-                <Route path="/*" element={<Navigate to="/" />}/>
+                <Route path="/*"  element={<Navigate to="/" />}/>
                 {/*{(authRoutes.concat(publicRoutes).includes(window.location.pathname))?*/}
                 {/*    <Route path="/*" element={<Navigate to="/" />}/>:null}*/}
 

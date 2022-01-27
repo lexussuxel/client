@@ -8,7 +8,7 @@ const HomePage = () => {
 
     return (
         <div>
-            <Button onClick={()=> navigate("/user/3")}> User 3</Button>
+           <h1 className="d-flex align-content-center">Homepage is not ready now, sorry(((</h1>
         </div>
     );
 };

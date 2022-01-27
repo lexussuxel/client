@@ -1,4 +1,4 @@
-import React, {useContext, useMemo, useState} from 'react';
+import React, {useContext, useEffect, useMemo, useState} from 'react';
 import {NavLink, useNavigate, useParams} from "react-router-dom";
 import {Context} from "../index";
 import {findUserById} from "../http/userAPI";
@@ -18,26 +18,18 @@ const UserPage = (props) => {
     const [useUser, setUseUser] = useState({email:"lala"}) ;
     const [collections, setCollections] = useState([]);
     //const [delId, setDelId] = useState()
-    const getUser = async() => {
-        console.log("as")
-        setUseUser(await findUserById(id));
 
-    }
-    useMemo(getUser, [id]);
+    useEffect(async()=>{
+        setUseUser(await findUserById(id));
+        setCollections(await getUserCollections(id));
+    }, [])
+
 
     const deleteCollections = async (delId) => {
-        console.log(delId)
         await deleteCollection(delId);
-        await getCollections();
-
-
+        setCollections(await getUserCollections(id))
     }
 
-    const getCollections = async() => {
-        setCollections(await getUserCollections(id));
-
-    }
-    useMemo(getCollections, [id]);
 
     return (
         <Container >

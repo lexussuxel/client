@@ -4,7 +4,7 @@ import {Button, Navbar} from "react-bootstrap";
 import { useNavigate} from "react-router-dom"
 import {Nav, NavLink} from "react-bootstrap";
 import {Container} from "react-bootstrap";
-import {COLLECTION_CREATE_ROUTE, HOMEPAGE_ROUTE} from "../util/constants";
+import {ADMIN_ROUTE, AUTH_ROUTE, COLLECTION_CREATE_ROUTE, HOMEPAGE_ROUTE} from "../util/constants";
 import {observer} from "mobx-react-lite";
 
 
@@ -25,11 +25,11 @@ const NavBar = observer(() => {
                         </Nav>
                         :
                         <Nav className="ml-auto" >
-                            <Button variant={"outline-secondary"} className="m-2" onClick={() => window.location.pathname = "/auth"}>Log in</Button>
+                            <Button variant={"outline-secondary"} className="m-2" onClick={() => navigate(AUTH_ROUTE)}>Log in</Button>
                         </Nav>}
                     {user.user.role === "ADMIN"?
                         <Nav className="ml-auto" >
-                            <Button variant={"outline-secondary"} className="m-2" onClick={() => window.location.pathname = "/admin"}>Admin page</Button>
+                            <Button variant={"outline-secondary"} className="m-2" onClick={() => navigate(ADMIN_ROUTE)}>Admin page</Button>
                         </Nav>:null
                     }
                 </Container>

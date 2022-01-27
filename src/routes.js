@@ -2,7 +2,7 @@ import Admin from "./pages/Admin";
 import {
     ADMIN_ROUTE,
     AUTH_ROUTE, COLLECTION_CREATE_ROUTE,
-    COLLECTIONS_ROUTE, CREATE_ITEM_ROUTE,
+    COLLECTIONS_ROUTE,
     HOMEPAGE_ROUTE,
     REGISTRATION_ROUTE,
     USER_ROUTE
@@ -12,7 +12,6 @@ import UserPage from "./pages/UserPage";
 import Auth from "./pages/Auth";
 import Collection from "./pages/Collection";
 import CreateCollection from "./pages/CreateCollection";
-import CreateItem from "./pages/CreateItem";
 
 
 export const adminRoutes = [
@@ -56,9 +55,6 @@ export const publicRoutes = [
     {
         path: COLLECTIONS_ROUTE + "/:id",
         Component: Collection
-    },
-    {
-        path: CREATE_ITEM_ROUTE,
-        Component: CreateItem
     }
+
 ]

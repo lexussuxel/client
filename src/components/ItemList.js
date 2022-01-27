@@ -1,19 +1,12 @@
-import React, {useContext, useMemo, useState} from 'react';
+import React, {useContext, useEffect, useMemo, useState} from 'react';
 import {observer} from "mobx-react-lite";
 import {getItemInCollection} from "../http/itemAPI";
 import {useParams} from "react-router-dom";
 import {Row} from "react-bootstrap";
 import OneItem from "./OneItem";
 
-const ItemList = observer(() => {
+const ItemList = observer(({items}) => {
 
-    const [items, setItems] = useState([]);
-    const {id} = useParams();
-    const getItems = async () => {
-        setItems(await getItemInCollection(id))
-    }
-
-    useMemo(getItems, [id])
 
 
     return (

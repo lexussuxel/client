@@ -14,18 +14,15 @@ const App = observer( () => {
     const [loading, setLoading] = useState(true);
 
 
-
     useEffect(() => {
         check().then(data => {
-            user.setUser(true);
-            user.setIsAuth(true);
-        }).finally(() => {
-            setLoading(false);
-        })
+            user.setUser(data)
+            user.setIsAuth(true)
+        }).finally(() => setLoading(false))
     }, [])
 
     if (loading){
-        return <Spinner animation={"grow"}/>
+        return <Spinner animation={"grow"} className="d-flex align-self-center"/>
     }
 
   return (
