@@ -5,14 +5,14 @@ import {useParams} from "react-router-dom";
 import {Row} from "react-bootstrap";
 import OneItem from "./OneItem";
 
-const ItemList = observer(({items}) => {
+const ItemList = observer(({items, deleteI}) => {
 
 
 
     return (
         <Row className="d-flex">
             {items.map(item =>
-                <OneItem key={item.id} item={item}/>
+                <OneItem key={item.id} item={item} deleteI={deleteI}/>
             )}
         </Row>
     );

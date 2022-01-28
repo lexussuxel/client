@@ -22,12 +22,11 @@ const UserPage = (props) => {
     useEffect(async()=>{
         setUseUser(await findUserById(id));
         setCollections(await getUserCollections(id));
-    }, [])
+    }, [id])
 
 
     const deleteCollections = async (delId) => {
-        await deleteCollection(delId);
-        setCollections(await getUserCollections(id))
+        await deleteCollection(delId).then(async () => setCollections(await getUserCollections(id)))
     }
 
 

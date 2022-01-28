@@ -6,11 +6,11 @@ import {Button, Col, Container, Row} from "react-bootstrap";
 import NavigateItems from "../components/NavigateItems";
 import ItemList from "../components/ItemList";
 import ItemInputModal from "../components/ItemInputModal";
-import {CreateItem, getItemInCollection} from "../http/itemAPI";
-import defImage from "./image.png"
+import {CreateItem, DeleteItem, getItemInCollection} from "../http/itemAPI";
+import {observer} from "mobx-react-lite";
 
 
-const Collection = () => {
+const Collection = observer(() => {
 
     const {user} = useContext(Context)
     const navigate  = useNavigate();
@@ -28,21 +28,24 @@ const Collection = () => {
     useEffect(
         async() =>
             setItems(await getItemInCollection(id)),
-        [])
+        [id])
 
     const CreateItem1 = async (name, description, image) => {
-        if (!image){
-            image = new File([""], "image.png", {
-                type: "image/jpeg"
-            })}
-        console.log(image)
+
         const formData = new FormData()
         formData.append('name', name)
         formData.append('description', description)
         formData.append('img', image)
         formData.append('collectionId', id)
         await CreateItem(formData, id).then(data => setItemVisible(false))
+        setItems(await getItemInCollection(id))
 
+    }
+
+    const DeleteI = async (item) => {
+        console.log(item)
+        await DeleteItem(item).then(async () => setItems(await getItemInCollection(id)))
+        console.log("aaaaa")
     }
 
     useMemo(getCollection, [id]);
@@ -63,11 +66,11 @@ const Collection = () => {
                 <hr/>
                 <Row>
                     <Col md={3}>
-                        <NavigateItems />
+                        <NavigateItems items={items} />
 
                     </Col>
                     <Col md={9}>
-                        <ItemList items={items}/>
+                        <ItemList items={items} deleteI={DeleteI}/>
                     </Col>
 
                 </Row>
@@ -76,6 +79,6 @@ const Collection = () => {
             <ItemInputModal show={itemVisible} onHide={Hide} create={CreateItem1}/>
         </Container>
     );
-};
+});
 
 export default Collection;

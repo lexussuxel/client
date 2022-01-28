@@ -6,16 +6,9 @@ import {getItemInCollection} from "../http/itemAPI";
 import {findUserById} from "../http/userAPI";
 
 
-const NavigateItems = observer(() => {
+const NavigateItems = observer(({items}) => {
     const {id} = useParams();
-    const [items, setItems] = useState([]);
     const [selectedItemId, setSelectedItemId] = useState();
-
-    const getItems= async() => {
-        setItems(await getItemInCollection(id));
-
-    }
-    useMemo(getItems, [id]);
     return (
         <ListGroup>
             {items.map(item =>
