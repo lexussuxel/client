@@ -9,7 +9,7 @@ const AppRouter = () => {
     const {user} = useContext(Context)
     return (
             <Routes>
-                {user.user.role === "ADMIN" &&
+                {user.a &&
                     adminRoutes.map(({path, Component}) =>
                         <Route path={path} key={path} element={<Component />} />
                     )

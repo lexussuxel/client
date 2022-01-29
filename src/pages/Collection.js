@@ -8,6 +8,8 @@ import ItemList from "../components/ItemList";
 import ItemInputModal from "../components/ItemInputModal";
 import {CreateItem, DeleteItem, getItemInCollection} from "../http/itemAPI";
 import {observer} from "mobx-react-lite";
+import ShowItemModal from "../components/ShowItemModal";
+import Markdown from 'markdown-to-jsx';
 
 
 const Collection = observer(() => {
@@ -15,6 +17,11 @@ const Collection = observer(() => {
     const {user} = useContext(Context)
     const navigate  = useNavigate();
     const [itemVisible, setItemVisible] = useState(false)
+    const [showItemVisible, setShowItemVisible] = useState(false)
+    const [getItem, setGetItem] = useState({});
+    const showHide = () => {
+        setShowItemVisible(false)
+    }
     const Hide = () => {
         setItemVisible(false)
     }
@@ -33,6 +40,7 @@ const Collection = observer(() => {
     const CreateItem1 = async (name, description, image) => {
 
         const formData = new FormData()
+        formData.append('privatee', collection.private)
         formData.append('name', name)
         formData.append('description', description)
         formData.append('img', image)
@@ -41,11 +49,12 @@ const Collection = observer(() => {
         setItems(await getItemInCollection(id))
 
     }
-
+    const openItem = (item) => {
+        setGetItem(item)
+        setShowItemVisible(true)
+    }
     const DeleteI = async (item) => {
-        console.log(item)
         await DeleteItem(item).then(async () => setItems(await getItemInCollection(id)))
-        console.log("aaaaa")
     }
 
     useMemo(getCollection, [id]);
@@ -62,7 +71,7 @@ const Collection = observer(() => {
                     }
                 </div>
 
-                <h4>{collection.description}</h4>
+               <h4>{collection.description}</h4>
                 <hr/>
                 <Row>
                     <Col md={3}>
@@ -70,13 +79,14 @@ const Collection = observer(() => {
 
                     </Col>
                     <Col md={9}>
-                        <ItemList items={items} deleteI={DeleteI}/>
+                        <ItemList items={items} deleteI={DeleteI} getItem={openItem} />
                     </Col>
 
                 </Row>
 
             </Row>
             <ItemInputModal show={itemVisible} onHide={Hide} create={CreateItem1}/>
+            <ShowItemModal show={showItemVisible} onHide={showHide} item={getItem} deleteI={DeleteI} addComments={collection.addComments}/>
         </Container>
     );
 });

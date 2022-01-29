@@ -21,6 +21,7 @@ const NavBar = observer(() => {
                         <Nav className="ml-auto" >
                             <Button variant={"outline-secondary"} className="m-2" onClick={() => navigate(`/user/${user.user.id}`)}>My Page</Button>
                             <Button variant={"outline-secondary"} className="m-2" onClick={() => navigate(COLLECTION_CREATE_ROUTE)} >Create new collection</Button>
+
                         </Nav>
                         :
                         <Nav className="ml-auto" >
@@ -41,7 +42,7 @@ const NavBar = observer(() => {
                         </Nav>:null
                     }
                     {user.isAuth?
-                        <Button variant={"outline-secondary"} className="m-2" onClick={() => {user.setIsAuth(false); user.setUser({}); localStorage.setItem('token', "");navigate(HOMEPAGE_ROUTE)}}>Exit</Button>
+                        <Button variant={"outline-secondary"} className="m-2" onClick={() => {user.setIsAuth(false); user.setUser({}); user.setA(false);localStorage.setItem('token', "");navigate(HOMEPAGE_ROUTE)}}>Exit</Button>
                         :null
                     }
                 </Container>

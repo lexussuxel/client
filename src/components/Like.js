@@ -20,7 +20,6 @@ const Like = ({collection}) => {
     useEffect(() => { setLiked(likedBool)}, [likedBool] )
 
 
-
     const [pic, setPic] = useState(liked?redLikePic:likePic);
 
     useEffect(() => { setPic(liked?redLikePic:likePic)}, [liked] )

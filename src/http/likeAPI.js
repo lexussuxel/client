@@ -16,3 +16,4 @@ export const getLikes = async (collectionId) => {
     console.log(data)
     return data;
 }
+

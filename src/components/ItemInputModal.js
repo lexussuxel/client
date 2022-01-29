@@ -55,7 +55,7 @@ const ItemInputModal = ({show, onHide, create}) => {
                         value={description}
                         onChange={e => setDescription(e.target.value)}
                         className="mt-2"
-                        type="text"
+                        as="textarea" rows={3}
                         placeholder="Do you want to describe your item?"
                     />
                     {drag?

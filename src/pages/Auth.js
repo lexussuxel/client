@@ -28,6 +28,9 @@ const Auth = observer(() => {
             }
             user.setUser(data);
             user.setIsAuth(true)
+            if (user.user.role === "ADMIN"){
+                user.setA(true)
+            }
             navigate(`/user/${data.id}`)
         }catch(e){
             alert(e.response.data.message)

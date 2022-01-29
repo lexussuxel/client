@@ -28,15 +28,17 @@ const OneCollection = ({collection, deleteCollections, id}) => {
                             </div>
                         </div>
                         <p>{collection.description}</p>
+
                     </div>:null:
                     <div className="d-grid gap-2">
                         <hr style={{color: "black", height: 2}}/>
                         <Button variant="secondary" onClick={() => navigate(COLLECTIONS_ROUTE+`/${collection.id}`)}>{collection.name}</Button>
                         <p>{collection.description}</p>
                        <Like collection={collection}/>
+
                     </div>
                 }
-
+                <Row className="d-flex align-items-end">Count of items: {collection.itemCount}</Row>
 
 
             </div>

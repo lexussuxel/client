@@ -3,13 +3,14 @@ import {Button, Card, Col, Image} from "react-bootstrap";
 import defImage from "../assets/image.png"
 import {Context} from "../index";
 
-const OneItem = ({item, deleteI}) => {
+
+const OneItem = ({item, deleteI, getItem}) => {
 
     const {user} = useContext(Context)
 
     return (
         <Col md={3}>
-            <Card style={{width: 150, cursor: 'pointer'}} border={"light"}>
+            <Card style={{width: 150, cursor: 'pointer'}} border={"light"} onClick={()=>{getItem(item)}}>
                 {item.img !== "null"?
                     <Image width={150} height={150} src={process.env.REACT_APP_API_URL + item.img}/>
                     :
