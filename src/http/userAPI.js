@@ -19,6 +19,10 @@ export const login= async (email, password) => {
     return jwt_decode(data.token);
 }
 
+export const deleteU = async(id) =>{
+    await $authHost.delete(`/api/user/${id}`);
+}
+
 export const check = async () => {
     const {data} = await $authHost.get('api/user/auth' )
     localStorage.setItem('token', data.token)

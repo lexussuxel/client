@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {getAllUsers, update} from "../http/userAPI";
+import {deleteU, getAllUsers, update} from "../http/userAPI";
 import {Button, Container, Dropdown, Form, FormControl, Table} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import {USER_ROUTE} from "../util/constants";
@@ -36,6 +36,8 @@ const Admin = () => {
                }
                break;
            case 3:
+               await deleteU(user.id);
+               setUsers(await getAllUsers())
                break;
        }
 

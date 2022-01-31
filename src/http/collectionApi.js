@@ -39,7 +39,6 @@ export const findCollectionById = async (id) => {
 
 export const deleteCollection = async (id) => {
         await $authHost.delete(`/api/collection/${id}`);
-        const data = await findCollectionById(id);
         //console.log(data);
         //return data;
 }
