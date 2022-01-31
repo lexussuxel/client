@@ -34,10 +34,10 @@ const OneCollection = ({collection, deleteCollections, id}) => {
                         <Button variant="secondary" onClick={() => navigate(COLLECTIONS_ROUTE+`/${collection.id}`)}>{collection.name}</Button>
                         <p>{collection.description}</p>
                        <Like collection={collection}/>
-
+                        <Row className="d-flex align-items-end">Count of items: {collection.itemCount}</Row>
                     </div>
                 }
-                <Row className="d-flex align-items-end">Count of items: {collection.itemCount}</Row>
+
 
 
             </div>
