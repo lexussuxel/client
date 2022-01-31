@@ -19,7 +19,7 @@ const CreateCollection = ({collection}) => {
         setDescription(collection.description)
         setAddComments(collection.addComments)
         setPrivatee(collection.private)
-    }},[collection.id])
+    }},[])
 
     const click = async () => {
 
