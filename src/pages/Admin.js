@@ -1,17 +1,25 @@
 import React, {useEffect, useState} from 'react';
 import {getAllUsers, update} from "../http/userAPI";
-import {Button, Container, Dropdown, Table} from "react-bootstrap";
+import {Button, Container, Dropdown, Form, FormControl, Table} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import {USER_ROUTE} from "../util/constants";
 
 const Admin = () => {
 
     const [users, setUsers] = useState([]);
+    const [filtredUsers, setFiltredUsers] = useState([])
+
     const navigate = useNavigate();
 
     useEffect(async()=> {
-        setUsers(await getAllUsers())
+        await getAllUsers().then((data)=> {setUsers(data);setFiltredUsers(data)})
+
     }, [])
+
+    const search = (value) => {
+        console.log(value)
+        setFiltredUsers(users.filter((user)=> user.email.includes(value)))
+    }
 
     const changeState = async (user, status)=>{
        switch(status){
@@ -44,6 +52,15 @@ const Admin = () => {
         <Container>
 
             <h1 className="mt-4">Admin page</h1>
+            <Form className="d-flex mb-2">
+                <FormControl
+                    type="search"
+                    placeholder="Search email"
+                    onChange={(e)=>search(e.target.value)}
+                    className="me-2"
+                    aria-label="Search"
+                />
+            </Form>
             <Table striped bordered hover size="sm">
                 <thead>
                 <tr>
@@ -55,7 +72,7 @@ const Admin = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {users.map((user)=>
+                {filtredUsers.map((user)=>
                     <tr>
                         <td>{user.id}</td>
                         <td><Button variant="link" onClick={()=>navigate(`/user/${user.id}`)}>{user.email}</Button></td>

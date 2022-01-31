@@ -5,7 +5,8 @@ import {
     COLLECTIONS_ROUTE,
     HOMEPAGE_ROUTE,
     REGISTRATION_ROUTE,
-    USER_ROUTE
+    USER_ROUTE,
+    EDIT_COLLECTION_ROUTE
 } from "./util/constants";
 import HomePage from "./pages/HomePage";
 import UserPage from "./pages/UserPage";
@@ -24,6 +25,10 @@ export const adminRoutes = [
 
 export const authRoutes = [
 
+    {
+        path: EDIT_COLLECTION_ROUTE,
+        Component: CreateCollection
+    }
 
 ]
 

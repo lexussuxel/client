@@ -13,7 +13,6 @@ export const delLike = async(collectionId, userId) => {
 
 export const getLikes = async (collectionId) => {
     const {data} = await $host.get(`api/like/${collectionId}`);
-    console.log(data)
     return data;
 }
 

@@ -7,7 +7,6 @@ import {Context} from "../index";
 import Like from "./Like";
 
 const OneCollection = ({collection, deleteCollections, id}) => {
-    console.log(collection.id)
     const {user} = useContext(Context);
 
     const navigate = useNavigate();

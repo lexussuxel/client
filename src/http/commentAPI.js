@@ -13,7 +13,6 @@ export const delComments = async(id) => {
 
 export const getComments = async (itemId) => {
     const {data} = await $host.get(`api/comment/${itemId}`);
-    console.log(data)
     return data;
 }
 

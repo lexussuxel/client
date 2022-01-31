@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Card, Form, Modal} from "react-bootstrap";
 
 
@@ -6,12 +6,14 @@ import {Button, Card, Form, Modal} from "react-bootstrap";
 const ItemInputModal = ({show, onHide, create}) => {
     const [name, setName] = useState();
     const [description, setDescription] = useState();
-    const [image, setImage] = useState();
+    const [image, setImage] = useState("");
     const [drag, setDrag] = useState(false);
 
+
     const setFile = (e) => {
-        console.log(e.target.files)
+        e.preventDefault()
         setImage(e.target.files[0])
+        console.log(e.target.files[0])
     }
 
     function dragStartHandler(e) {
@@ -56,7 +58,7 @@ const ItemInputModal = ({show, onHide, create}) => {
                         onChange={e => setDescription(e.target.value)}
                         className="mt-2"
                         as="textarea" rows={3}
-                        placeholder="Do you want to describe your item?"
+                        placeholder="Do you want to describe your item?(you can use markdown formatting here)"
                     />
                     {drag?
                         <Card onDragStart={(e)=>dragStartHandler(e)}

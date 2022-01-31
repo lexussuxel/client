@@ -20,22 +20,18 @@ const NavBar = observer(() => {
                     {user.isAuth ?
                         <Nav className="ml-auto" >
                             <Button variant={"outline-secondary"} className="m-2" onClick={() => navigate(`/user/${user.user.id}`)}>My Page</Button>
-                            <Button variant={"outline-secondary"} className="m-2" onClick={() => navigate(COLLECTION_CREATE_ROUTE)} >Create new collection</Button>
+
+                            {user.user.state?
+                                <Button variant={"outline-secondary"} className="m-2" onClick={() => navigate(COLLECTION_CREATE_ROUTE)} >Create new collection</Button>
+                                :
+                                <Button variant={"outline-secondary"} disabled="true" className="m-2" onClick={() => navigate(COLLECTION_CREATE_ROUTE)} >Create new collection</Button>
+                            }
 
                         </Nav>
                         :
                         <Nav className="ml-auto" >
                             <Button variant={"outline-secondary"} className="m-2" onClick={() => navigate(AUTH_ROUTE)}>Log in</Button>
                         </Nav>}
-                    <Form className="d-flex">
-                        <FormControl
-                            type="search"
-                            placeholder="Search"
-                            className="me-2"
-                            aria-label="Search"
-                        />
-                        <Button variant="secondary">Search</Button>
-                    </Form>
                     {user.user.role === "ADMIN"?
                         <Nav className="ml-auto" >
                             <Button variant={"outline-secondary"} className="m-2" onClick={() => navigate(ADMIN_ROUTE)}>Admin page</Button>

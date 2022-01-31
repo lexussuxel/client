@@ -16,11 +16,21 @@ export const getUserCollections = async (userId) => {
 }
 
 
+export const getBiggest = async () => {
+    const {data} = await $host.get(`api/collection/biggest`);
+    return data;
+}
+
+
 export const getAllCollections = async () => {
     const {data} = await $host.get(`api/collection/all`);
     return data;
 }
 
+export const updateCol = async (name, description, addComments, privatee, id) => {
+    const {data} = await $authHost.post(`api/collection/${id}`, {name, description, addComments, privatee});
+    return data;
+}
 
 export const findCollectionById = async (id) => {
     const {data} = await $host.get(`api/collection/${id}`);

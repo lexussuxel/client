@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Container} from "react-bootstrap";
+import {Button, Card, Container} from "react-bootstrap";
 import Markdown from "markdown-to-jsx";
 import {useNavigate} from "react-router-dom";
 
@@ -7,9 +7,15 @@ const Comment = ({comment}) => {
     const navigate = useNavigate()
     return (
         <Container>
-            <hr/>
-            <Button variant="link" onClick={()=> navigate(`/user/${comment.userId}`)}>{comment.userName}</Button>
-            <Markdown>{comment.text}</Markdown>
+            <Card>
+                <Card.Header>
+                    <Button variant="link" onClick={()=> navigate(`/user/${comment.userId}`)}>{comment.userName}</Button>
+                </Card.Header>
+                <Card.Body>
+                    <Markdown>{comment.text}</Markdown>
+                </Card.Body>
+
+            </Card>
         </Container>
     );
 };
