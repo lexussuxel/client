@@ -42,40 +42,33 @@ const Collection = observer(() => {
 
     const CreateItem1 = async (name, description, image) => {
 
-        // const formData = new FormData()
-        // formData.append('privatee', collection.private)
-        // formData.append('name', name)
-        // formData.append('description', description)
-        //
-        // formData.append('collectionId', id)
-        //
-        //
-        // const reader = new FileReader();
-        // if(image) {
-        //     await reader.readAsDataURL(image);
-        //     reader.onloadend = async () => {
-        //         setImg(reader.result);
-        //         formData.append('img', img)
-        //         console.log("end of upload file")
-        //         await CreateItem(formData, id).then(data => setItemVisible(false)).then( async() => setItems(await getItemInCollection(id)))
-        //     };
-        //     console.log(image)
-        // } else{
-        //     setImg("null")
-        //     formData.append('img', img)
-        //     await CreateItem(formData, id).then(data => setItemVisible(false)).then( async() => setItems(await getItemInCollection(id)))
-        // }
-        //
-        // console.log("B")
-
         const formData = new FormData()
         formData.append('privatee', collection.private)
         formData.append('name', name)
         formData.append('description', description)
-        formData.append('img', image)
+
         formData.append('collectionId', id)
-        console.log(image)
-        await CreateItem(formData, id).then(data => setItemVisible(false)).then( async() => setItems(await getItemInCollection(id)))
+
+
+        const reader = new FileReader();
+        if(image) {
+            await reader.readAsDataURL(image);
+            reader.onloadend = async () => {
+                setImg(reader.result);
+                formData.append('img', img)
+                console.log("end of upload file")
+                await CreateItem(formData, id).then(data => setItemVisible(false)).then( async() => setItems(await getItemInCollection(id)))
+            };
+            console.log(image)
+        } else{
+            setImg("null")
+            formData.append('img', img)
+            await CreateItem(formData, id).then(data => setItemVisible(false)).then( async() => setItems(await getItemInCollection(id)))
+        }
+
+        console.log("B")
+
+
 
 
     }
