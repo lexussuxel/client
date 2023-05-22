@@ -42,7 +42,7 @@ const ShowItemModal = ({show, item, onHide, deleteI, addComments}) => {
             <Modal.Body >
 
                     {item.img !== "null"?
-                        <Image width={400} height={400} src={item.img} />
+                        <Image width={400} height={400} src={process.env.REACT_APP_API_URL+"/"+item.img} />
                         :<Image width={400} height={400} src={defImage} />
                     }
                     <hr/>

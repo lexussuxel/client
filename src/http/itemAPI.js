@@ -13,7 +13,7 @@ export const getLast = async () => {
 
 
 export const CreateItem = async (item, id) => {
-
+    console.log(item.get('img'))
     const {data} = await $authHost.post(`api/item/${id}/create`, item);
     return data;
 }

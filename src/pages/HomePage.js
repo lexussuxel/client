@@ -32,7 +32,7 @@ const HomePage = () => {
         async() =>{
             setCollections(await getBiggest())
             setItems(await getLast())},
-        [user.isAuth])
+        [])
 
     const deleteCollections = async (delId) => {
         await deleteCollection(delId).then(async () => setCollections(await getLast()))
@@ -56,7 +56,7 @@ const HomePage = () => {
                     <Card className="m-auto mt-4">
                         <Card.Header>Collections with biggest count of items</Card.Header>
                         <Card.Body>
-                            {collections.map((collection) =>
+                            {collections?.map((collection) =>
                                 <OneCollection collection={collection} id={collection.userId} deleteCollections={deleteCollections}/>)}
 
                         </Card.Body>

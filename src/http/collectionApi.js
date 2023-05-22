@@ -17,7 +17,8 @@ export const getUserCollections = async (userId) => {
 
 
 export const getBiggest = async () => {
-    const {data} = await $host.get(`api/collection/biggest`);
+    const {data} = await $host.get(`api/collection/biggest/big`);
+    console.log(data)
     return data;
 }
 

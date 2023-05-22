@@ -52,14 +52,18 @@ const Collection = observer(() => {
 
         const reader = new FileReader();
         if(image) {
-            await reader.readAsDataURL(image);
-            reader.onloadend = async () => {
-                setImg(reader.result);
-                formData.append('img', img)
-                console.log("end of upload file")
-                await CreateItem(formData, id).then(data => setItemVisible(false)).then( async() => setItems(await getItemInCollection(id)))
-            };
-            console.log(image)
+            // await reader.readAsDataURL(image);
+            // reader.onloadend = async () => {
+            //     setImg(reader.result);
+            //     formData.append('img', img)
+            //     console.log("end of upload file")
+            //     await CreateItem(formData, id).then(data => setItemVisible(false)).then( async() => setItems(await getItemInCollection(id)))
+            // };
+            // console.log(image)
+            formData.append('img', image)
+            await CreateItem(formData, id).then(data => setItemVisible(false))
+
+
         } else{
             setImg("null")
             formData.append('img', img)

@@ -21,7 +21,7 @@ const NavBar = observer(() => {
                         <Nav className="ml-auto" >
                             <Button variant={"outline-secondary"} className="m-2" onClick={() => navigate(`/user/${user.user.id}`)}>My Page</Button>
 
-                            {user.user.state?
+                            {user.user?
                                 <Button variant={"outline-secondary"} className="m-2" onClick={() => navigate(COLLECTION_CREATE_ROUTE)} >Create new collection</Button>
                                 :
                                 <Button variant={"outline-secondary"} disabled="true" className="m-2" onClick={() => navigate(COLLECTION_CREATE_ROUTE)} >Create new collection</Button>
